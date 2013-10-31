@@ -68,3 +68,18 @@ class BarChartTest(ResponseTestToolkitSolo):
         self.assertIn('categories', x_axis)
         categories = x_axis['categories']
         self.assertEquals(categories, ['Apples', 'Bananas', 'Oranges'])
+
+    def test_y_axis(self):
+        self.assertIn('yAxis', self.data)
+        y_axis = self.data['yAxis']
+        self.assertEquals(y_axis, {"title": {"text": 'Fruit eaten'}})
+
+    def test_series(self):
+        # series = [
+        #     {"name": 'Jane', "data": [1, 0, 4]},
+        #     {"name": 'John', "data": [5, 7, 3]}
+        # ]
+        self.assertIn('series', self.data)
+        series = self.data['series']
+        self.assertTrue(isinstance(series, (list, tuple, set)))
+        self.assertEquals(len(series), 2)
