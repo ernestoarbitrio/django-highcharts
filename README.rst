@@ -8,3 +8,6 @@ This library is mostly based on `django-chartjs <https://github.com/novapost/dja
 by Rémy Hubscher.
 
 Please don't try to use it yet, it's really not ready.
+
+* `Documentation is on RTFD <http://django-highcharts.readthedocs.org/en/latest/>`_
+* `Source code is on Github <https://github.com/novapost/django-highcharts>`_
