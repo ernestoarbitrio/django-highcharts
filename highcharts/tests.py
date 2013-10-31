@@ -7,7 +7,7 @@ from django.test import RequestFactory
 class MockHighChartsBarView(HighChartsBarView):
     title = u'My Mock Title'
     categories = ['Apples', 'Bananas', 'Oranges']
-    y_axis = {"title": {"text": 'Fruit eaten'}}
+    y_axis_title = 'Fruit eaten'
     series = [
         {"name": 'Jane', "data": [1, 0, 4]},
         {"name": 'John', "data": [5, 7, 3]}

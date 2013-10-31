@@ -6,6 +6,7 @@ class HighChartsBarView(HighChartsBasicView, View):
     chart = {"type": 'bar'}
     categories = []
     y_axis = {}
+    y_axis_title = None
 
     def get_data(self):
         data = super(HighChartsBarView, self).get_data()
@@ -13,6 +14,7 @@ class HighChartsBarView(HighChartsBasicView, View):
         data['xAxis'] = {}
         data['xAxis']['categories'] = self.categories
         data['yAxis'] = self.y_axis
+        data['yAxis']['title'] = {"text": self.y_axis_title}
         data['series'] = self.series
         return data
 
