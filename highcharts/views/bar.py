@@ -3,12 +3,15 @@ from django.views.generic import View
 
 
 class HighChartsBarView(HighChartsBasicView, View):
-    x_axis = {'categories': []}
+    chart = {"type": 'bar'}
+    categories = []
     y_axis = {}
 
     def get_data(self):
         data = super(HighChartsBarView, self).get_data()
-        data['xAxis'] = self.x_axis
+        data['chart'] = self.chart
+        data['xAxis'] = {}
+        data['xAxis']['categories'] = self.categories
         data['yAxis'] = self.y_axis
         data['series'] = self.series
         return data

@@ -34,6 +34,57 @@ update the static files:
 
 You're now ready to use the available views.
 
+The view
+--------
+
+.. code-block:: python
+
+    class BarView(HighChartsBarView):
+        categories = ['Orange', 'Bananas', 'Apples']
+
+        @property
+        def series(self):
+            result = []
+            for name in ('Joe', 'Jack', 'William', 'Averell'):
+                data = []
+                for x in range(len(self.categories)):
+                    data.append(random.randint(0, 10))
+                result.append({'name': name, "data": data})
+            return result
+
+The template
+------------
+
+.. code-block:: django
+
+    {% load staticfiles %}<!doctype html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Hello</title>
+        <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+        <script type="text/javascript" src="{% static 'js/highcharts/highcharts.js' %}"></script>
+        <script type="text/javascript">
+        $(function () {
+            $.getJSON("{% url 'bar' %}", function(data) {
+                $('#container').highcharts(data);
+            });
+        });
+        </script>
+    </head>
+    <body>
+    <div id="container" style="height: 300px"></div>
+    </body>
+    </html>
+
+.. warning::
+
+    Please note that the highcharts.js file should be called **after** the
+    JQuery library.
+
+Available views
+===============
+
 .. toctree::
     :maxdepth: 2
 
