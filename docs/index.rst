@@ -25,6 +25,20 @@ To integrate it into a Django project, simply add it to your `INSTALLED_APPS`:
         # some other stuff...
     ]
 
+Don't forget to set your `STATIC_ROOT` path and to run the following command to
+update the static files:
+
+.. code-block:: sh
+
+    python manage.py collectstatic
+
+You're now ready to use the available views.
+
+.. toctree::
+    :maxdepth: 2
+
+    bar
+
 Indices and tables
 ==================
 
