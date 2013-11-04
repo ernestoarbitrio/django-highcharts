@@ -89,8 +89,9 @@ Available views
 
 .. toctree::
     :maxdepth: 2
+    :glob:
 
-    bar
+    views/*
 
 Indices and tables
 ==================
