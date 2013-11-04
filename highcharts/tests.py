@@ -91,6 +91,13 @@ class CommonTestCase(ResponseTestToolkit):
             data = json.loads(response.content)
             self.assertIn('title', data)
 
+    def test_chart(self):
+        "Test chart data"
+        for response in self.responses:
+            data = json.loads(response.content)
+            self.assertIn('chart', data)
+            self.assertTrue(isinstance(data['chart'], dict))
+
 
 class BarChartTest(ResponseTestToolkitSolo):
     klass = MockHighChartsBarView
@@ -98,6 +105,10 @@ class BarChartTest(ResponseTestToolkitSolo):
     def test_title(self):
         "Test title parameter"
         self.assertEquals(self.data['title'], u'My Mock Title')
+
+    def test_chart_type(self):
+        "Test chart type"
+        self.assertEquals(self.data['chart'].get('type', None), 'bar')
 
     def test_x_axis(self):
         "Test X Axis content"
@@ -133,6 +144,10 @@ class LineChartTest(ResponseTestToolkitSolo):
     def test_title(self):
         "Test title parameter"
         self.assertEquals(self.data['title'], u'My Line title')
+
+    def test_chart_type(self):
+        "Test chart type"
+        self.assertEquals(self.data['chart'].get('type', None), None)
 
     def test_x_axis(self):
         "Test X Axis content"
