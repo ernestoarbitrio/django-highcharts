@@ -8,10 +8,16 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
 
     def get_data(self):
         data = {}
-        data['title'] = self.title or 'No title'
+        # Title is "kinda mandatory"
+        data['title'] = {}
+        data['title']['text'] = self.title or None
+
+        # Subtitle option
         if self.subtitle:
             data['subtitle'] = {}
             data['subtitle']['text'] = self.subtitle
+
+        # Chart type option
         data['chart'] = {}
         if self.chart_type:
             data['chart']['type'] = self.chart_type

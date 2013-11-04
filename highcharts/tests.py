@@ -78,7 +78,7 @@ class EmptyOptionsTestCase(ResponseTestToolkitSolo):
     klass = EmptyChart
 
     def test_title(self):
-        self.assertEquals(self.data['title'], 'No title')
+        self.assertEquals(self.data['title'], {'text': None})
 
     def test_subtitle(self):
         self.assertNotIn('subtitle', self.data)
@@ -108,6 +108,7 @@ class CommonTestCase(ResponseTestToolkit):
         for response in self.responses:
             data = json.loads(response.content)
             self.assertIn('title', data)
+            self.assertIn('text', data['title'])
 
     def test_chart(self):
         "Test chart data"
@@ -122,7 +123,7 @@ class BarChartTest(ResponseTestToolkitSolo):
 
     def test_title(self):
         "Test title parameter"
-        self.assertEquals(self.data['title'], u'My Mock Title')
+        self.assertEquals(self.data['title'], {'text': u'My Mock Title'})
 
     def test_subtitle(self):
         "Test subtitle"
@@ -168,7 +169,7 @@ class LineChartTest(ResponseTestToolkitSolo):
 
     def test_title(self):
         "Test title parameter"
-        self.assertEquals(self.data['title'], u'My Line title')
+        self.assertEquals(self.data['title'], {'text': u'My Line title'})
 
     def test_chart_type(self):
         "Test chart type"

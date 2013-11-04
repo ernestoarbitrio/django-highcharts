@@ -7,7 +7,7 @@ Options
 
 Highchart views all share the same general options:
 
-* ``title`` (defaults as ``No title``): The title of the graph
+* ``title`` (defaults as ``None``): The title of the graph
 * ``subtitle`` (defaults as ``None``): will display a subtitle. May contain
   HTML tags (including links)
 
