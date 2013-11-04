@@ -5,6 +5,10 @@ from highcharts.views.line import HighChartsLineView
 from django.test import RequestFactory
 
 
+class EmptyChart(HighChartsLineView):
+    pass
+
+
 class MockHighChartsBarView(HighChartsBarView):
     title = u'My Mock Title'
     categories = ['Apples', 'Bananas', 'Oranges']
@@ -13,6 +17,7 @@ class MockHighChartsBarView(HighChartsBarView):
         {"name": 'Jane', "data": [1, 0, 4]},
         {"name": 'John', "data": [5, 7, 3]}
     ]
+    subtitle = u'My subtitle'
 
 
 class MockHighChartsLineView(HighChartsLineView):
@@ -69,6 +74,19 @@ class ResponseTestToolkitSolo(ResponseTestToolkit):
         return json.loads(self.response.content)
 
 
+class EmptyOptionsTestCase(ResponseTestToolkitSolo):
+    klass = EmptyChart
+
+    def test_title(self):
+        self.assertEquals(self.data['title'], 'No title')
+
+    def test_subtitle(self):
+        self.assertNotIn('subtitle', self.data)
+
+    def test_chart(self):
+        self.assertEquals(self.data['chart'], {})
+
+
 class CommonTestCase(ResponseTestToolkit):
     "Testing common properties / results"
     classes = (MockHighChartsBarView, HighChartsBarView, HighChartsLineView)
@@ -105,6 +123,13 @@ class BarChartTest(ResponseTestToolkitSolo):
     def test_title(self):
         "Test title parameter"
         self.assertEquals(self.data['title'], u'My Mock Title')
+
+    def test_subtitle(self):
+        "Test subtitle"
+        self.assertIn('subtitle', self.data)
+        subtitle = self.data['subtitle']
+        self.assertIn('text', subtitle)
+        self.assertEquals(subtitle['text'], 'My subtitle')
 
     def test_chart_type(self):
         "Test chart type"
