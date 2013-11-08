@@ -1,15 +1,12 @@
-from highcharts.views import HighChartsBasicView
 from django.views.generic import View
+from highcharts.views.common import HighChartsDualAxisView
 
 
-class HighChartsLineView(HighChartsBasicView, View):
+class HighChartsLineView(HighChartsDualAxisView, View):
     categories = []
-    y_axis = {}
-    y_axis_title = None
 
     def get_data(self):
         data = super(HighChartsLineView, self).get_data()
-        data['xAxis'] = {}
         data['xAxis']['categories'] = self.categories
         data['yAxis'] = self.y_axis
         data['yAxis']['title'] = {"text": self.y_axis_title}
