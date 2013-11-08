@@ -7,7 +7,7 @@ HighChartsBarView
 
 ::
 
-    from highcharts.views.bar import HighChartsBarView
+    from highcharts.views import HighChartsBarView
 
 
 Available options

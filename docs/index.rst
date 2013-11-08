@@ -39,7 +39,7 @@ The view
 
 .. code-block:: python
 
-    from highcharts.views.bar import HighChartsBarView
+    from highcharts.views import HighChartsBarView
 
     class BarView(HighChartsBarView):
         categories = ['Orange', 'Bananas', 'Apples']

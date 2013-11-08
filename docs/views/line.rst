@@ -7,7 +7,7 @@ HighChartsLineView
 
 ::
 
-    from highcharts.views.line import HighChartsLineView
+    from highcharts.views import HighChartsLineView
 
 
 Available options
