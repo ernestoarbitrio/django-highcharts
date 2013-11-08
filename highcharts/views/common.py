@@ -5,6 +5,9 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     title = None
     subtitle = None
     chart_type = None
+    tooltip = None
+    tooltip_point_format = None
+    plot_options = {}
 
     def get_data(self):
         data = {}
@@ -21,6 +24,19 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
         data['chart'] = {}
         if self.chart_type:
             data['chart']['type'] = self.chart_type
+
+        # tooltip
+        if self.tooltip or self.tooltip_point_format:
+            if not self.tooltip:
+                self.tooltip = {}
+            data['tooltip'] = self.tooltip
+            if self.tooltip_point_format:
+                data['tooltip']['pointFormat'] = self.tooltip_point_format
+
+        # plotOptions is just dict dumping
+        if self.plot_options:
+            data['plotOptions'] = self.plot_options
+
         return data
 
     def get(self, request, *args, **kwargs):

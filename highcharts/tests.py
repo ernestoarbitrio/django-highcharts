@@ -2,6 +2,7 @@ from django.utils import simplejson as json
 from django.test import TestCase
 from highcharts.views.bar import HighChartsBarView
 from highcharts.views.line import HighChartsLineView
+from highcharts.views.area import HighChartsAreaView
 from django.test import RequestFactory
 
 
@@ -44,6 +45,48 @@ class MockHighChartsLineView(HighChartsLineView):
             "data": [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3,
                      6.6, 4.8]
         }]
+
+
+class MockHighChartsAreaView(HighChartsAreaView):
+    title = 'US and USSR nuclear stockpiles'
+    y_axis_title = 'Nuclear weapon states'
+    tooltip_point_format = '{series.name} produced <b>{point.y:,.0f}</b><br/>'\
+                           'warheads in {point.x}'
+    plot_options = {
+        "area": {
+            "pointStart": 1940,
+            "marker": {
+                "enabled": False,
+                "symbol": 'circle',
+                "radius": 2,
+                "states": {
+                    "hover": {
+                        "enabled": True
+                    }
+                }
+            }
+        }
+    }
+    series = [{
+        "name": 'USA',
+        "data": [None, None, None, None, None, 6, 11, 32, 110, 235, 369, 640,
+                1005, 1436, 2063, 3057, 4618, 6444, 9822, 15468, 20434, 24126,
+                27387, 29459, 31056, 31982, 32040, 31233, 29224, 27342, 26662,
+                26956, 27912, 28999, 28965, 27826, 25579, 25722, 24826, 24605,
+                24304, 23464, 23708, 24099, 24357, 24237, 24401, 24344, 23586,
+                22380, 21004, 17287, 14747, 13076, 12555, 12144, 11009, 10950,
+                10871, 10824, 10577, 10527, 10475, 10421, 10358, 10295, 10104]
+        }, {
+        "name": 'USSR/Russia',
+        "data": [
+            None, None, None, None, None, None, None, None, None, None,
+            5, 25, 50, 120, 150, 200, 426, 660, 869, 1060, 1605, 2471, 3322,
+            4238, 5221, 6129, 7089, 8339, 9399, 10538, 11643, 13092, 14478,
+            15915, 17385, 19055, 21205, 23044, 25393, 27935, 30062, 32049,
+            33952, 35804, 37431, 39197, 45000, 43000, 41000, 39000, 37000,
+            35000, 33000, 31000, 29000, 27000, 25000, 24000, 23000, 22000,
+            21000, 20000, 19000, 18000, 18000, 17000, 16000]
+    }]
 
 
 class ResponseTestToolkit(TestCase):
@@ -89,7 +132,12 @@ class EmptyOptionsTestCase(ResponseTestToolkitSolo):
 
 class CommonTestCase(ResponseTestToolkit):
     "Testing common properties / results"
-    classes = (MockHighChartsBarView, HighChartsBarView, HighChartsLineView)
+    classes = (
+        MockHighChartsBarView,
+        HighChartsBarView,
+        HighChartsLineView,
+        MockHighChartsAreaView,
+    )
 
     def test_status_code(self):
         "Test view status code"
@@ -214,3 +262,30 @@ class LineChartTest(ResponseTestToolkitSolo):
         self.assertEquals(
             fourth["data"],
             [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8])
+
+
+class AreaChartTest(ResponseTestToolkitSolo):
+    klass = MockHighChartsAreaView
+
+    def test_title(self):
+        "Test title parameter"
+        self.assertEquals(
+            self.data['title'],
+            {'text': u'US and USSR nuclear stockpiles'})
+
+    def test_chart_type(self):
+        "Test chart type"
+        self.assertEquals(self.data['chart'].get('type', None), 'area')
+
+    def test_tooltip(self):
+        "Test tooltip"
+        self.assertEquals(
+            self.data['tooltip'].get('pointFormat'),
+            '{series.name} produced <b>{point.y:,.0f}</b>'
+            '<br/>warheads in {point.x}'
+        )
+
+    def test_plot_options(self):
+        "plot options is just dict dumping"
+        plot_options = self.data['plotOptions']
+        self.assertEquals(plot_options, MockHighChartsAreaView.plot_options)
