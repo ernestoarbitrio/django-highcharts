@@ -1,9 +1,9 @@
-==================
-Overviews on views
-==================
+=====
+Views
+=====
 
-Options
-=======
+Common options
+==============
 
 Highchart views all share the same general options. If one of these options
 is not set by a class property or an instance property, it'll use the
@@ -42,3 +42,48 @@ Examples:
         def title(self):
             return 'My stats for %s' % datetime.date.today()
 
+Available views
+===============
+
+HighChartsBarView
+-----------------
+
+::
+
+    from highcharts.views import HighChartsBarView
+
+
+Extra options
+#############
+
+* `categories` (defaults to `[]`): should return a list of string,
+* `y_axis_title` (defaults to `""`): the title of the Y axis.
+
+
+HighChartsLineView
+------------------
+
+::
+
+    from highcharts.views import HighChartsLineView
+
+
+Extra options
+#############
+
+* `categories` (defaults to `[]`): should return a list of string,
+* `y_axis_title` (defaults to `""`): the title of the Y axis.
+
+
+HighChartsAreaView
+------------------
+
+::
+
+    from highcharts.views import HighChartsAreaView
+
+
+Extra options
+#############
+
+No extra options for the Area View (yet).

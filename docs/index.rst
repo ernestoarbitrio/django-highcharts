@@ -84,14 +84,14 @@ The template
     Please note that the highcharts.js file should be called **after** the
     JQuery library.
 
-Available views
-===============
+Further documentation
+=====================
 
 .. toctree::
     :maxdepth: 2
     :glob:
 
-    views/*
+    views
 
 Indices and tables
 ==================
