@@ -28,3 +28,7 @@ class HighChartsStackedView(HighChartsBarView):
             plot_options['series'] = {}
         plot_options['series']['stacking'] = 'normal'
         return plot_options
+
+
+class HighChartsColumnView(HighChartsBarView):
+    chart_type = 'column'

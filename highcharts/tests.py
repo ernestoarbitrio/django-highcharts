@@ -1,6 +1,7 @@
 from django.utils import simplejson as json
 from django.test import TestCase
 from highcharts.views.bar import HighChartsBarView, HighChartsStackedView
+from highcharts.views.bar import HighChartsColumnView
 from highcharts.views.line import HighChartsLineView
 from highcharts.views.area import HighChartsAreaView
 from django.test import RequestFactory
@@ -10,19 +11,9 @@ class EmptyChart(HighChartsLineView):
     pass
 
 
-class MockHighChartsBarView(HighChartsBarView):
+class BarDataMixin(object):
     title = u'My Mock Title'
-    categories = ['Apples', 'Bananas', 'Oranges']
-    y_axis_title = 'Fruit eaten'
-    series = [
-        {"name": 'Jane', "data": [1, 0, 4]},
-        {"name": 'John', "data": [5, 7, 3]}
-    ]
     subtitle = u'My subtitle'
-
-
-class MockHighChartsStackedView(HighChartsStackedView):
-    title = u'My Mock Stacked'
     categories = ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
     y_axis_title = 'Fruit eaten'
     series = [
@@ -30,6 +21,18 @@ class MockHighChartsStackedView(HighChartsStackedView):
         {"name": 'John', "data": [2, 2, 3, 2, 1]},
         {"name": 'Joe', "data": [3, 4, 4, 2, 5]},
     ]
+
+
+class MockHighChartsBarView(BarDataMixin, HighChartsBarView):
+    pass
+
+
+class MockHighChartsStackedView(BarDataMixin, HighChartsStackedView):
+    pass
+
+
+class MockHighChartsColumnView(BarDataMixin, HighChartsColumnView):
+    pass
 
 
 class MockHighChartsLineView(HighChartsLineView):
@@ -146,6 +149,7 @@ class CommonTestCase(ResponseTestToolkit):
     classes = (
         MockHighChartsBarView,
         MockHighChartsStackedView,
+        MockHighChartsColumnView,
         HighChartsBarView,
         HighChartsLineView,
         MockHighChartsAreaView,
@@ -202,7 +206,10 @@ class BarChartTest(ResponseTestToolkitSolo):
         x_axis = self.data['xAxis']
         self.assertIn('categories', x_axis)
         categories = x_axis['categories']
-        self.assertEquals(categories, ['Apples', 'Bananas', 'Oranges'])
+        self.assertEquals(
+            categories,
+            ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
+        )
 
     def test_y_axis(self):
         "Test Y Axis content"
@@ -215,19 +222,30 @@ class BarChartTest(ResponseTestToolkitSolo):
         self.assertIn('series', self.data)
         series = self.data['series']
         self.assertTrue(isinstance(series, (list, tuple, set)))
-        self.assertEquals(len(series), 2)
+        self.assertEquals(len(series), 3)
         first = series[0]
         self.assertEquals(first['name'], 'Jane')
-        self.assertEquals(first['data'], [1, 0, 4])
+        self.assertEquals(first['data'], [5, 3, 4, 7, 2])
         second = series[1]
         self.assertEquals(second['name'], 'John')
-        self.assertEquals(second['data'], [5, 7, 3])
+        self.assertEquals(second['data'], [2, 2, 3, 2, 1])
+        second = series[2]
+        self.assertEquals(second['name'], 'Joe')
+        self.assertEquals(second['data'], [3, 4, 4, 2, 5])
 
 
-class StackedChartTest(ResponseTestToolkitSolo):
+class ColumnChartTest(BarChartTest):
+    klass = MockHighChartsColumnView
+
+    def test_chart_type(self):
+        "Test chart type"
+        self.assertEquals(self.data['chart'].get('type', None), 'column')
+
+
+class StackedChartTest(BarChartTest):
     klass = MockHighChartsStackedView
 
-    def test_plot_options(self):
+    def test_chart_type(self):
         self.assertIn('plotOptions', self.data)
         self.assertIn('series', self.data['plotOptions'])
         self.assertIn('stacking', self.data['plotOptions']['series'])
