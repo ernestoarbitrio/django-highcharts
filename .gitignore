@@ -1,4 +1,5 @@
+.idea
 *.pyc
-*.pyo
-*.egg-info
-docs/_build/
+demo
+*.sqlite3
+manage.py
