@@ -4,6 +4,7 @@ from highcharts.views.common import HighChartsDualAxisView
 
 class HighChartsAreaView(HighChartsDualAxisView, View):
     chart_type = 'area'
+    _series = []
 
     def get_data(self):
         data = super(HighChartsAreaView, self).get_data()
@@ -12,4 +13,8 @@ class HighChartsAreaView(HighChartsDualAxisView, View):
 
     @property
     def series(self):
-        return []
+        return self._series
+
+    @series.setter
+    def series(self, value):
+        self._series = value

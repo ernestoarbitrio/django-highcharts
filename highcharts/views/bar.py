@@ -5,6 +5,7 @@ from highcharts.views.common import HighChartsDualAxisView
 class HighChartsBarView(HighChartsDualAxisView, View):
     chart_type = 'bar'
     categories = []
+    _series = []
 
     def get_data(self):
         data = super(HighChartsBarView, self).get_data()
@@ -14,7 +15,11 @@ class HighChartsBarView(HighChartsDualAxisView, View):
 
     @property
     def series(self):
-        return []
+        return self._series
+
+    @series.setter
+    def series(self, value):
+        self._series = value
 
 
 class HighChartsStackedView(HighChartsBarView):

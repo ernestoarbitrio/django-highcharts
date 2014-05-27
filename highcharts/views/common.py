@@ -11,9 +11,11 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     chart = {}
     legend = True
 
+
     def get_data(self):
         data = dict()
         # Title of the graph
+
         data['title'] = {}
         data['title']['text'] = self.title or None
 

@@ -4,6 +4,8 @@ from highcharts.views.common import HighChartsBasicView
 
 class HighChartsPieView(HighChartsBasicView, View):
     chart_type = 'pie'
+    _series = []
+    _drilldown = []
 
     def get_data(self):
         data = super(HighChartsPieView, self).get_data()
@@ -13,8 +15,16 @@ class HighChartsPieView(HighChartsBasicView, View):
 
     @property
     def series(self):
-        return []
+        return self._series
 
     @property
     def drilldown(self):
-        return []
+        return self._drilldown
+
+    @series.setter
+    def series(self, value):
+        self._series = value
+
+    @drilldown.setter
+    def drilldown(self, value):
+        self._drilldown = value

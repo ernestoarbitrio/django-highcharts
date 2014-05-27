@@ -5,6 +5,10 @@ from highcharts.views.common import HighChartsDualAxisView
 class HighChartsSpeedometerView(HighChartsDualAxisView, View):
     chart_type = 'gauge'
 
+    _series = []
+    _yaxis = []
+    _pane = []
+
     def get_data(self):
         data = super(HighChartsSpeedometerView, self).get_data()
         data['series'] = self.series
@@ -14,12 +18,24 @@ class HighChartsSpeedometerView(HighChartsDualAxisView, View):
 
     @property
     def series(self):
-        return []
+        return self._series
 
     @property
     def yaxis(self):
-        return []
+        return self._yaxis
 
     @property
     def pane(self):
-        return []
+        return self._pane
+
+    @series.setter
+    def series(self, value):
+        self._series = value
+
+    @yaxis.setter
+    def yaxis(self, value):
+        self._yaxis = value
+
+    @pane.setter
+    def pane(self, value):
+        self._pane = value

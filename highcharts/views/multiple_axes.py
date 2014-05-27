@@ -3,9 +3,13 @@ from highcharts.views.common import HighChartsDualAxisView
 
 
 class HighChartsMultiAxesView(HighChartsDualAxisView, View):
+
     chart_type = ''
     categories = []
     xlabels = {'rotation': -45}
+
+    _series = []
+    _yaxis = []
 
     def get_data(self):
         data = super(HighChartsMultiAxesView, self).get_data()
@@ -17,11 +21,19 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
 
     @property
     def series(self):
-        return []
+        return self._series
 
     @property
     def yaxis(self):
-        return []
+        return self._yaxis
+
+    @series.setter
+    def series(self, value):
+        self._series = value
+
+    @yaxis.setter
+    def yaxis(self, value):
+        self._yaxis = value
 
 
 class HighChartsStackedView(HighChartsMultiAxesView):
