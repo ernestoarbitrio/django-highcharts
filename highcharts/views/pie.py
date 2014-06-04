@@ -4,6 +4,7 @@ from highcharts.views.common import HighChartsBasicView
 
 class HighChartsPieView(HighChartsBasicView, View):
     chart_type = 'pie'
+    options3d = ''
     _series = []
     _drilldown = []
 
@@ -11,6 +12,7 @@ class HighChartsPieView(HighChartsBasicView, View):
         data = super(HighChartsPieView, self).get_data()
         data['series'] = self.series
         data['drilldown'] = self.drilldown
+        data['chart']['options3d'] = self.options3d
         return data
 
     @property
