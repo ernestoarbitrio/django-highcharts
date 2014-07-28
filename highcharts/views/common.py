@@ -10,6 +10,7 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     plot_options = {}
     chart = {}
     legend = True
+    coloraxis = {}
 
 
     def get_data(self):
@@ -18,7 +19,7 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
 
         data['title'] = {}
         data['title']['text'] = self.title or None
-
+        data['colorAxis'] = self.coloraxis
         # Subtitle option
         if self.subtitle:
             data['subtitle'] = {}
