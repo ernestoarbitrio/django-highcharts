@@ -7,7 +7,7 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
     chart_type = ''
     categories = []
     xlabels = {'rotation': -45}
-
+    plotlines = None
     _series = []
     _yaxis = []
 
@@ -15,6 +15,7 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
         data = super(HighChartsMultiAxesView, self).get_data()
         data['xAxis']['categories'] = self.categories
         data['xAxis']['labels'] = self.xlabels
+        data['xAxis']['plotLines'] = self.plotlines
         data['series'] = self.series
         data['yAxis'] = self.yaxis
         return data
