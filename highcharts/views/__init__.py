@@ -4,3 +4,4 @@ from highcharts.views.area import HighChartsAreaView  # noqa
 from highcharts.views.multiple_axes import HighChartsMultiAxesView  # noqa
 from highcharts.views.pie import HighChartsPieView  # noqa
 from highcharts.views.speedometer import HighChartsSpeedometerView
+from highcharts.views.multiple_axes import HighChartsStockView
