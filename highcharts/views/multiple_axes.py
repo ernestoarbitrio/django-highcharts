@@ -10,11 +10,14 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
     plotlines = None
     _series = []
     _yaxis = []
+    xtitle = {}
+    
     def get_data(self):
         data = super(HighChartsMultiAxesView, self).get_data()
         data['xAxis']['categories'] = self.categories
         data['xAxis']['labels'] = self.xlabels
         data['xAxis']['plotLines'] = self.plotlines
+        data['xAxis']['title'] = self.xtitle
         data['series'] = self.series
         data['yAxis'] = self.yaxis
         return data
