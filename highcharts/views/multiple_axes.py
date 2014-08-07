@@ -11,7 +11,7 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
     _series = []
     _yaxis = []
     xtitle = {}
-    
+
     def get_data(self):
         data = super(HighChartsMultiAxesView, self).get_data()
         data['xAxis']['categories'] = self.categories
