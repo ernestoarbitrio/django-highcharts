@@ -12,5 +12,6 @@ Generate charts in you Django application using Highcharts helpers.
 - Bar charts
 - Heatmap charts
 - Polar Spider web charts
+- HighStock basic charts
 
 * `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`_
