@@ -11,6 +11,7 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
     _series = []
     _yaxis = []
     xtitle = {}
+    legend = {}
 
     def get_data(self):
         data = super(HighChartsMultiAxesView, self).get_data()
@@ -47,13 +48,12 @@ class HighChartsStockView(HighChartsDualAxisView, View):
     _series = []
     _yaxis = []
     _xaxis = []
+
     def get_data(self):
         data = super(HighChartsStockView, self).get_data()
         data['series'] = self.series
         data['yAxis'] = self.yaxis
         data['xAxis'] = {}
-        print data['xAxis']
-        print 'cass'
         return data
 
     @property
@@ -76,7 +76,7 @@ class HighChartsStockView(HighChartsDualAxisView, View):
     def xaxis(self):
         return self._xaxis
 
-    @yaxis.setter
+    @xaxis.setter
     def xaxis(self, value):
         self._xaxis = value
 

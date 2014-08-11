@@ -1,7 +1,9 @@
-from highcharts.views.bar import HighChartsBarView  # noqa
-from highcharts.views.line import HighChartsLineView  # noqa
-from highcharts.views.area import HighChartsAreaView  # noqa
-from highcharts.views.multiple_axes import HighChartsMultiAxesView  # noqa
-from highcharts.views.pie import HighChartsPieView  # noqa
+from highcharts.views.bar import HighChartsBarView
+from highcharts.views.line import HighChartsLineView
+from highcharts.views.area import HighChartsAreaView
+from highcharts.views.multiple_axes import HighChartsMultiAxesView
+from highcharts.views.pie import HighChartsPieView
 from highcharts.views.speedometer import HighChartsSpeedometerView
 from highcharts.views.multiple_axes import HighChartsStockView
+from highcharts.views.heatmap import HighChartsHeatMapView
+from highcharts.views.polar import HighChartsPolarView

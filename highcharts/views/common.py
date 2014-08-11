@@ -12,7 +12,6 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     legend = True
     coloraxis = {}
 
-
     def get_data(self):
         data = dict()
         # Title of the graph
