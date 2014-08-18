@@ -1,8 +1,8 @@
 #################
 Django Highcharts
 #################
-This is a Fork of novapost package
-Generate charts in you Django application using Highcharts helpers.
+This is a Fork of novapost package to
+generate charts in your Django application using Highcharts helpers.
 
 - Pie with drilldown charts
 - 3D Pie Options

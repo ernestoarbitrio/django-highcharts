@@ -15,8 +15,6 @@ def highcharts_js(context,
                   enable_highstock=False,
                   enable_3d=False,
                   enable_heatmap=False):
-    #request = context['request']
-    #request.highcharts_js_rendered = True
     return {
         'STATIC_URL': get_static_url(),
         'activate_highcharts': activate_highcharts,
