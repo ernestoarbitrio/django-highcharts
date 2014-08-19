@@ -11,6 +11,13 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     chart = {}
     legend = True
     coloraxis = {}
+    exporting = {
+        'sourceWidth': 1600,
+        'sourceHeight': 900,
+        'chartOptions': {
+            'subtitle': None
+        }
+    }
 
     def get_data(self):
         data = dict()
@@ -19,6 +26,7 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
         data['title'] = {}
         data['title']['text'] = self.title or None
         data['colorAxis'] = self.coloraxis
+        data['exporting'] = self.exporting
         # Subtitle option
         if self.subtitle:
             data['subtitle'] = {}
