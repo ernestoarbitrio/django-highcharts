@@ -3,6 +3,7 @@ from braces.views import JSONResponseMixin, AjaxResponseMixin
 
 class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     title = None
+    title_style = None
     subtitle = None
     chart_type = None
     tooltip = None
@@ -25,6 +26,7 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
 
         data['title'] = {}
         data['title']['text'] = self.title or None
+        data['title']['style'] = self.title_style or {}
         data['colorAxis'] = self.coloraxis
         data['exporting'] = self.exporting
         # Subtitle option
