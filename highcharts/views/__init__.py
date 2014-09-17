@@ -7,3 +7,4 @@ from highcharts.views.speedometer import HighChartsSpeedometerView
 from highcharts.views.multiple_axes import HighChartsStockView
 from highcharts.views.heatmap import HighChartsHeatMapView
 from highcharts.views.polar import HighChartsPolarView
+from highcharts.views.multiple_axes import HighChartsMultiXAxesView

@@ -40,6 +40,7 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
         self._yaxis = value
 
 
+
 class HighChartsStockView(HighChartsDualAxisView, View):
 
     chart_type = ''
@@ -96,3 +97,43 @@ class HighChartsStackedView(HighChartsMultiAxesView):
 
 class HighChartsColumnView(HighChartsMultiAxesView):
     chart_type = 'column'
+
+
+class HighChartsMultiXAxesView(HighChartsDualAxisView, View):
+
+    chart_type = ''
+    categories = []
+    _series = []
+    _yaxis = []
+    _xaxis = []
+
+    def get_data(self):
+        data = super(HighChartsMultiXAxesView, self).get_data()
+        data['series'] = self.series
+        data['yAxis'] = self.yaxis
+        data['xAxis'] = self.xaxis
+        return data
+
+    @property
+    def series(self):
+        return self._series
+
+    @property
+    def yaxis(self):
+        return self._yaxis
+
+    @series.setter
+    def series(self, value):
+        self._series = value
+
+    @yaxis.setter
+    def yaxis(self, value):
+        self._yaxis = value
+
+    @property
+    def xaxis(self):
+        return self._xaxis
+
+    @xaxis.setter
+    def xaxis(self, value):
+        self._xaxis = value
