@@ -11,6 +11,9 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
     plot_options = {}
     chart = {}
     legend = True
+    credits = {
+            'enabled': False
+        }
     coloraxis = {}
     exporting = {
         'sourceWidth': 1600,
@@ -29,6 +32,7 @@ class HighChartsBasicView(JSONResponseMixin, AjaxResponseMixin):
         data['title']['style'] = self.title_style or {}
         data['colorAxis'] = self.coloraxis
         data['exporting'] = self.exporting
+        data['credits'] = self.credits
         # Subtitle option
         if self.subtitle:
             data['subtitle'] = {}
