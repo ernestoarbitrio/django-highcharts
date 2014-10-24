@@ -1,6 +1,5 @@
-#################
-Django Highcharts
-#################
+## Django Highcharts
+
 This is a Fork of novapost package to
 generate charts in your Django application using Highcharts helpers.
 
@@ -16,7 +15,7 @@ generate charts in your Django application using Highcharts helpers.
 
 * `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`_
 
-## Install
+### Install
 There are a few different ways you can install pyechonest:
 
 * Use setuptools: `pip install git+https://github.com/ernestoarbitrio/django-highcharts.git`
