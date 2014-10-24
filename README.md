@@ -16,8 +16,9 @@ generate charts in your Django application using Highcharts helpers.
 
 * `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`_
 
-############
-Installation
-############
+## Install
+There are a few different ways you can install pyechonest:
 
-'easy_install -U pyechonest'
+* Use setuptools: `pip install git+https://github.com/ernestoarbitrio/django-highcharts.git`
+* Download the zipfile from the [downloads](https://github.com/ernestoarbitrio/django-highcharts/archive/master.zip) page and install it. 
+* Checkout the source: `git@github.com:ernestoarbitrio/django-highcharts.git` and install it yourself.
