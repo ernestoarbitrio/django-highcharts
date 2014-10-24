@@ -15,3 +15,9 @@ generate charts in your Django application using Highcharts helpers.
 - HighStock basic charts
 
 * `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`_
+
+############
+Installation
+############
+
+'easy_install -U pyechonest'
