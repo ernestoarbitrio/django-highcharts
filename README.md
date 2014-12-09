@@ -35,7 +35,7 @@ Don’t forget to set your STATIC_ROOT path and to run the following command to 
 
 `python manage.py collectstatic`
 
-Write a basic graph (in view.py file or if you want in a graph.py file):
+Write a graph with different series type (in view.py file or if you want in a graph.py file):
 ```
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView,
                               HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView)
@@ -96,6 +96,71 @@ class BarView(HighChartsMultiAxesView):
         ]
         return series
 ```
+if you want you can write a graph based on a particular class of chart. For exampla if you need a pie chart with drilldown interaction:
+```
+from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView,
+                              HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView)
+
+class PieDrilldown(HighChartsPieView):
+    title = 'Torta'
+    subtitle = 'torino'
+
+    @property
+    def series(self):
+        series = [
+            {
+                'name': 'Classi',
+                'colorByPoint': 'true',
+                'data': [
+                    {'name': 'Emorroidi',
+                     'y': 10,
+                     'drilldown': 'emorroidi'},
+                    {'name': 'Igiene e bellezza',
+                     'y': 12,
+                     'drilldown': 'igiene'},
+                    {'name': 'Omeopatia',
+                     'y': 8,
+                     'drilldown': 'omeopatia'}
+                ]
+            }
+        ]
+        return series
+
+    @property
+    def drilldown(self):
+        drilldown = {
+            'series': [
+                {'id': 'emorroidi',
+                 'name': 'Emorroidi',
+                 'data': [
+                     ['brand1', 7],
+                     ['brand2', 3],
+                     ['brand3', 5]
+                 ]},
+                {'id': 'igiene',
+                 'name': 'Igiene e Bellezza',
+                 'data': [
+                     ['brand1', 3],
+                     ['brand2', 1],
+                     ['brand3', 4],
+                     ['brand4', 5]
+                 ]},
+                {'id': 'omeopatia',
+                 'name': 'Omeopatia',
+                 'data': [
+                     ['brand1', 3],
+                     ['brand2', 1],
+                     ['brand3', 4],
+                     ['', 0]
+                 ]}
+            ]
+        }
+        return drilldown
+
+       
+```
+
+
 Then you need to map the graph to an url in url.py file:
 ```
    from graphs.py import BarView
