@@ -182,3 +182,56 @@ In the template:
             });
     });
 ```
+
+An advanced example with parameters passed via url and data retrived from db (using orm or raw query)
+```
+class AdvancedGraph(HighChartsMultiAxesView):
+    title = 'Advanced graph'
+    subtitle = 'params and query'
+    chart = {'zoomType': 'xy'}
+    tooltip = {'shared': 'true'}
+    legend = {
+        'layout': 'vertical',
+        'align': 'left',
+        'verticalAlign': 'top',
+        'y': 30
+    }
+
+    def get_data(self):
+        param = self.kwargs['param1']
+        f = MyModel.objects.get(field=param)
+        cursor = connection.cursor()
+        cursor.execute("select * from mydbfunction(%s)" as (outvalues json)", [f.pk])
+        graph = cursor.fetchall()
+       
+        #### SERIES
+        self.serie = graph[0]
+        
+        ##### X LABELS
+        self.categories = graph[1]
+
+        ##### Y AXIS DEFINITIONS
+        self.yaxis = {
+            'title': {
+                'text': 'Title 1'
+            },
+            'plotLines': [
+                {
+                    'value': 0,
+                    'width': 1,
+                    'color': '#808080'
+                }
+            ]
+        }
+
+        ##### SERIES WITH VALUES
+        self.series = self.serie
+        data = super(AdvancedGraph, self).get_data()
+        return data
+```
+then in urls.py
+Then you need to map the graph to an url in url.py file:
+```
+   from graphs.py import AdvancedGraph
+   url(regex='^adv/(?P<param1>\d+)/$', view=AdvancedGraph.as_view(), name='adv')
+```
