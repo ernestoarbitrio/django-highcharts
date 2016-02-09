@@ -13,7 +13,7 @@ generate charts in your Django application using Highcharts helpers.
 - Polar Spider web charts
 - HighStock basic charts
 
-* `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`_
+* `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`
 
 ### Install
 There are a few different ways you can install pyechonest:
