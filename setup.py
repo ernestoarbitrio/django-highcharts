@@ -14,7 +14,7 @@ def read_relative_file(filename):
 if __name__ == '__main__':  # ``import setup`` doesn't trigger setup().
     setup(
         name='django-highcharts',
-        version=read_relative_file('VERSION').strip(),
+        version='0.1.5',
         description="Django Highcharts helpers",
         long_description=read_relative_file('README.rst'),
         classifiers=['Development Status :: 4 - Beta',
@@ -26,7 +26,7 @@ if __name__ == '__main__':  # ``import setup`` doesn't trigger setup().
                      'Programming Language :: Python :: 2.7',
                      'Programming Language :: Python :: 3'],
         keywords='django chart highcharts ajax class based views',
-        author='Bruno Bord Froked By ernestoarbitrio',
+        author='ernestoarbitrio',
         author_email='ernesto.arbitrio@gmail.com',
         url='https://github.com/ernestoarbitrio/django-highcharts',
         license='BSD Licence',
