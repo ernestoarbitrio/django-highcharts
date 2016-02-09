@@ -14,8 +14,7 @@ def read_relative_file(filename):
 if __name__ == '__main__':  # ``import setup`` doesn't trigger setup().
     setup(
         name='django-highcharts',
-        version='0.1.5',
-        description="Django Highcharts helpers",
+        version='0.1.666666      description="Django Highcharts helpers",
         long_description=read_relative_file('README.rst'),
         classifiers=['Development Status :: 4 - Beta',
                      'Environment :: Web Environment',
