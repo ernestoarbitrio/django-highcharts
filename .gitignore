@@ -6,3 +6,4 @@ manage.py
 django_highcharts.egg-info
 build
 dist
+manage.py
