@@ -1,0 +1,7 @@
+<!-- it needs jquery to work
+<script src="//code.jquery.com/jquery-2.0.3.js" type="text/javascript"></script>
+-->
+{% load static %}
+{% if theme_name %}
+<script src="{% static 'js/highcharts/themes/' %}{{ theme_name }}"></script>
+{% endif %}

@@ -1,10 +1,6 @@
 __author__ = 'ernesto.arbitrio@gmail.com'
 
-import json
-
-from django import template
-from django.core.urlresolvers import reverse
-from django.template import Library, Variable
+from django.template import Library
 from ..utils import get_static_url
 
 register = Library()
@@ -22,4 +18,12 @@ def highcharts_js(context,
         'enable_3d': enable_3d,
         'enable_heatmap': enable_heatmap
     }
+
+
+def set_highcharts_theme(context, theme_name=None):
+    return {
+        'STATIC_URL': get_static_url(),
+        'theme_name': '{}{}'.format(theme_name, '.js')
+    }
 register.inclusion_tag("highcharts/highcharts_js.html", takes_context=True)(highcharts_js)
+register.inclusion_tag("highcharts/highcharts_theme.html", takes_context=True)(set_highcharts_theme)
