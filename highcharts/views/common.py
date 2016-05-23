@@ -75,5 +75,5 @@ class HighChartsDualAxisView(HighChartsBasicView):
         data = super(HighChartsDualAxisView, self).get_data()
         data['xAxis'] = {}
         data['yAxis'] = self.y_axis
-        #data['yAxis']['title'] = {"text": str(self.y_axis_title)}
+        data['yAxis']['title'] = {"text": self.y_axis_title}
         return data

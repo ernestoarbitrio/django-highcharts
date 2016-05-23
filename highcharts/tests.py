@@ -1,4 +1,4 @@
-from django.utils import simplejson as json
+import json
 from django.test import TestCase
 from highcharts.views.bar import HighChartsBarView, HighChartsStackedView
 from highcharts.views.bar import HighChartsColumnView
@@ -12,8 +12,9 @@ class EmptyChart(HighChartsLineView):
 
 
 class BarDataMixin(object):
-    title = u'My Mock Title'
-    subtitle = u'My subtitle'
+    title = 'My Mock Title'
+    subtitle = 'My subtitle'
+    title_style = None
     categories = ['Apples', 'Oranges', 'Pears', 'Grapes', 'Bananas']
     y_axis_title = 'Fruit eaten'
     series = [
@@ -36,7 +37,7 @@ class MockHighChartsColumnView(BarDataMixin, HighChartsColumnView):
 
 
 class MockHighChartsLineView(HighChartsLineView):
-    title = u"My Line title"
+    title = "My Line title"
     categories = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                   'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
@@ -135,7 +136,7 @@ class EmptyOptionsTestCase(ResponseTestToolkitSolo):
     klass = EmptyChart
 
     def test_title(self):
-        self.assertEquals(self.data['title'], {'text': None})
+        self.assertEquals(self.data['title'], {'text': None, 'style': {}})
 
     def test_subtitle(self):
         self.assertNotIn('subtitle', self.data)
@@ -187,7 +188,7 @@ class BarChartTest(ResponseTestToolkitSolo):
 
     def test_title(self):
         "Test title parameter"
-        self.assertEquals(self.data['title'], {'text': u'My Mock Title'})
+        self.assertEquals(self.data['title'], {'text': 'My Mock Title', 'style': {}})
 
     def test_subtitle(self):
         "Test subtitle"
@@ -260,7 +261,7 @@ class LineChartTest(ResponseTestToolkitSolo):
 
     def test_title(self):
         "Test title parameter"
-        self.assertEquals(self.data['title'], {'text': u'My Line title'})
+        self.assertEquals(self.data['title'], {'text': 'My Line title', 'style': {}})
 
     def test_chart_type(self):
         "Test chart type"
@@ -311,17 +312,17 @@ class AreaChartTest(ResponseTestToolkitSolo):
     klass = MockHighChartsAreaView
 
     def test_title(self):
-        "Test title parameter"
+        """Test title parameter"""
         self.assertEquals(
             self.data['title'],
-            {'text': u'US and USSR nuclear stockpiles'})
+            {'text': 'US and USSR nuclear stockpiles', 'style': {}})
 
     def test_chart_type(self):
-        "Test chart type"
+        """Test chart type"""
         self.assertEquals(self.data['chart'].get('type', None), 'area')
 
     def test_tooltip(self):
-        "Test tooltip"
+        """Test tooltip"""
         self.assertEquals(
             self.data['tooltip'].get('pointFormat'),
             '{series.name} produced <b>{point.y:,.0f}</b>'
