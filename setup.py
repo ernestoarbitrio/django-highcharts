@@ -23,8 +23,8 @@ if __name__ == '__main__':  # ``import setup`` doesn't trigger setup().
                      'Intended Audience :: Developers',
                      'License :: OSI Approved :: BSD License',
                      'Programming Language :: Python',
-                     'Programming Language :: Python :: 2.7',
-                     'Programming Language :: Python :: 3'],
+                     'Programming Language :: Python :: 2.7'
+                    ],
         keywords='django chart highcharts ajax class based views',
         author='ernestoarbitrio',
         author_email='ernesto.arbitrio@gmail.com',
