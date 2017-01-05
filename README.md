@@ -176,11 +176,11 @@ In the template:
    <!-- the graph container -->
    <div id="container" style="height: 400px; min-width: 310px; max-width: 1200px; margin: 0 auto"></div>
    <!-- the javascript call -->
-    $(function () 
-            $.getJSON("{% url 'bar' %}", function(data) 
-                $('#container').highcharts(data);
-            });
-    });
+   $(function () {
+       $.getJSON("{% url 'bar' %}", function(data) {
+           $('#container').highcharts(data);
+       });
+   })
 ```
 
 An advanced example with parameters passed via url and data retrived from db (using orm or raw query)
