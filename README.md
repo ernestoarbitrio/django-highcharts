@@ -96,7 +96,7 @@ class BarView(HighChartsMultiAxesView):
         ]
         return series
 ```
-if you want you can write a graph based on a particular class of chart. For exampla if you need a pie chart with drilldown interaction:
+if you want you can write a graph based on a particular class of chart. For example if you need a pie chart with drilldown interaction:
 ```
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView,
                               HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView)
