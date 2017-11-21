@@ -40,7 +40,6 @@ class HighChartsMultiAxesView(HighChartsDualAxisView, View):
         self._yaxis = value
 
 
-
 class HighChartsStockView(HighChartsDualAxisView, View):
 
     chart_type = ''
