@@ -1,6 +1,6 @@
 ## Django Highcharts
 
-This project starts from a fork of novapost package to
+This project is inspired from a fork of novapost package to
 generate charts in your Django application using Highcharts helpers.
 
 - Pie with drilldown charts
@@ -14,6 +14,10 @@ generate charts in your Django application using Highcharts helpers.
 - HighStock basic charts
 
 * `Source code is on Github <https://github.com/ernestoarbitrio/django-highcharts>`
+
+### Requirements
+ - `django > 1.8 (tested with 1.8.x and 1.11.x)`
+ - `python 2.7.x` or `python 3.x`
 
 ### Install
 There are a few different ways you can install pyechonest:
@@ -36,7 +40,7 @@ Don’t forget to set your STATIC_ROOT path and to run the following command to 
 `python manage.py collectstatic`
 
 Write a graph with different series type (in view.py file or if you want in a graph.py file):
-```
+```python
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView,
                               HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView)
                               
@@ -97,7 +101,7 @@ class BarView(HighChartsMultiAxesView):
         return series
 ```
 if you want you can write a graph based on a particular class of chart. For example if you need a pie chart with drilldown interaction:
-```
+```python
 from highcharts.views import (HighChartsMultiAxesView, HighChartsPieView,
                               HighChartsSpeedometerView, HighChartsHeatMapView, HighChartsPolarView)
 
@@ -163,13 +167,14 @@ class PieDrilldown(HighChartsPieView):
 
 Then you need to map the graph to an url in url.py file:
 ```
-   from graphs.py import BarView
+   from graphs import BarView
    url(regex='^bar/$', view=BarView.as_view(), name='bar')
 ```
 
 In the template:
-```
+```html
    {% load highcharts_tags %}
+   <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
    <!-- enable highcharts scripts -->
    <!-- highcharts_js (highcharts 3d highstock heatmap) you need to pass 1 or 0 if you want to enable 3d or highstock         etc...-->
    {% highcharts_js 1 0 0 0 %}
@@ -183,8 +188,21 @@ In the template:
    })
 ```
 
-An advanced example with parameters passed via url and data retrived from db (using orm or raw query)
+Naturally you need to write a standard django view to render the HTML that in turn call, via AJAX, the graph url and
+render the chart in the related html chart.
+For example:
+```python
+from django.shortcuts import render
+from django.views.generic import TemplateView
+
+
+class PlotView(TemplateView):
+    template_name = "plotter/plot.html"
+# Create your views here.
 ```
+
+An advanced example with parameters passed via url and data retrived from db (using orm or raw query)
+```python
 class AdvancedGraph(HighChartsMultiAxesView):
     title = 'Advanced graph'
     subtitle = 'params and query'
@@ -231,7 +249,7 @@ class AdvancedGraph(HighChartsMultiAxesView):
 ```
 then in urls.py
 Then you need to map the graph to an url in url.py file:
-```
+```python
    from graphs.py import AdvancedGraph
    url(regex='^adv/(?P<param1>\d+)/$', view=AdvancedGraph.as_view(), name='adv')
 ```
